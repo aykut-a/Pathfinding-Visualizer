@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
+  <title>Path Finder</title>
+  <script src="script.js" type="module" defer></script>
+</head>
+
+<body>
+
+  <div class="console" the-console>
+    <div>
+      <div class="dropdown">
+        <button class="dropbtn" maze-dropdown>Mazes <i class="material-icons">expand_more</i></button>
+        <div id="maze-dropdown" class="dropdown-content" drop1>
+          <li recursive-division>Recursive Division</li>
+          <li random-maze>Random Maze</li>
+          <li vertical-maze>Vertical Maze</li>
+          <li staircase>Staircase</li>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="dropdown">
+        <button class="dropbtn" algo-dropdown>Algorithms<i class="material-icons">expand_more</i></button>
+        <div id="algo-dropdown" class="dropdown-content drop2" drop2>
+          <li astar-algo>A* Search Algorithm</li>
+          <li dijktras-algo>Dijkstra's Algorithm</li>
+          <li bfs-algo>Breadth-First Search Algorithm</li>
+          <li dfs-algo>Depth-First Search Algorithm</li>
+        </div>
+      </div>
+    </div>
+    <button class="very-important-btn" find-the-path-btn>Pick an Algorithm</button>
+    <button class="mehh-btn" clear-path-button>Clear Path <i class="material-icons">delete</i></button>
+    <button class="mehh-btn" clear-board-button>Clear Board <i class="material-icons">delete</i></button>
+    <div>
+      <div class="dropdown">
+        <button class="dropbtn" speed-dropdown>Speed<i class="material-icons">expand_more</i></button>
+        <div id="algo-dropdown" class="dropdown-content drop3" drop3>
+          <li fast-speed>Fast</li>
+          <li slow-speed>Slow</li>
+        </div>
+      </div>
+    </div>
+
+    <button class="more-info-button" more-info-btn>More Info <i class="material-icons rotated-icon">error</i></button>
+  </div>
+
+  <p class="instructions" main-instructions>Pick an algorithm to find the shortest path.</p>
+
+  <div class="sideconsole" sideconsole>
+    <div>
+      <button class="reset-start-btn" reset-start-node>Reset Start Node</button>
+      <button class="reset-end-btn" reset-end-node>Reset End Node</button>
+    </div>
+
+    <p class="instructions" side-console-instructions>Click on a square to <span class="blue">start</span> creating
+      <span class="blue">obstacles</span>.
+    </p>
+
+    <div class="description">
+      <div class="description-sub">
+        <div class="displaySquare" style="background-color: var(--orange);">S</div> Start Node
+      </div>
+      <div class="description-sub">
+        <div class="displaySquare" style="background-color: green;">E</div> End Node
+      </div>
+      <div class="description-sub">
+        <div class="displaySquare" style="background-color: var(--blue);"></div> Obstacle
+      </div>
+      <div class="description-sub">
+        <div class="displaySquare" style="background-color: var(--yellow);"></div> Checked
+      </div>
+      <div class="description-sub">
+        <div class="displaySquare" style="background-color: var(--green);"></div> Path
+      </div>
+    </div>
+  </div>
+
+  <main class="the-maze"></main>
+
+
+  <div class="overlay">
+    <div class="more-info">
+      <i class="material-icons close-info-btn" style="font-size: 30px;" close-info-btn>close</i>
+      <button class="pn-button prev-btn" prev-btn> <i class="material-icons" style="font-size:36px">chevron_left</i>
+        Previous</button>
+      <button class="pn-button next-btn" next-btn> Next <i class="material-icons"
+          style="font-size:36px">chevron_right</i></button>
+      <div class="more-info-div" a*-information>
+        <h3>A* Search Algorithm</h3>
+        <p>A* uses <span class="blue">heuristics</span>, it is <span class="blue">weighted</span> and it is roughly
+          aware where the
+          end node
+          actually is. It gurantees the
+          <span class="blue">shortest path</span>.
+          Basically, every node on the grid has an associated gCost, hCost and an fCost.
+        </p>
+        <p><span class="bold">gCost</span> : Stands for the distance from the start node. How much I will have to move
+          to get here.</p>
+        <p><span class="bold">hCost</span> : Stands for the distance from the end node, however, the obstacles are yet
+          not considered.</p>
+        <p><span class="bold">fCost</span> : Is sum of both these costs.</p>
+        <p>When the end node is reached, A* will have already found out the shortest path to each node leading there and
+          thus will be able to show the shortest path. </p>
+        <p>We can say that A* is <span class="blue">focused</span> more on the end node because it has some ideas where
+          it is.</p>
+        <img src="Images/aStar.jpg" alt="">
+      </div>
+      <div class="more-info-div" style="display:none" dijktra-information>
+        <h3>Dijkstra's Algorithm</h3>
+        <p>Dijkstra uses <span class="blue">weights</span> as well, on it's way Dijkstra will calculate the shortest way
+          possible to reach the
+          end node. Whenever it reaches the end node, it will turn back and see which path led it there in the most
+          efficient way. However, it is <span class="bold">unbeknown</span> to Dijkstra where the end node is in the
+          beginning, so it will just search in <span class="bold">all</span> four
+          directions all the way. It guarantees the <span class="blue">shortest path</span>.</p>
+        <img src="Images/dijkstra.png" style="width:300px; height:300px" alt="">
+
+      </div>
+      <div class="more-info-div" style="display:none" bfs-information>
+        <h3>Breadth-First Search (BFS)</h3>
+        <p>BFS will check each <span class="bold">closest</span> neighboor node if they are the end node or not, as long
+          as they are not the endnode, it will make all the other nodes check <span class="bold">their</span> closest
+          neighboors do the same. It uses <span class="blue">FIFO</span>(first in first out) logic while checking the
+          nodes.
+          BFS will <span class="bold">store</span> which node checked for all their closest neighboors, so it won't
+          have to run those nodes again.It is unweighted and yet promises the <span class="blue">shortest path</span>.
+        </p>
+        <br>
+        <p>A real life example could be as follows,</p>
+        <p>You are trying to meet this guy Axel, you ask your <span class="bold">closest</span> friends if they know
+          Axel. They say no but kindly
+          of
+          them, they ask <span class="bold">their own</span> closest friends if they know Axel who will ask their
+          friends. Until someone on the
+          line says 'Yes I know him!.' It goes on. When Axel asks who asked for him, everyone on the line will point
+          back to the person who asked for Axel until you are pointed at. You will then have the closest <span
+            class="bold">'connection'</span>
+          you have
+          to Axel. However,do not forget not to ask the same person twice if they know Axel. That would be,
+          'unnecessary'</p>
+        <img src="Images/bfs.png" alt="">
+      </div>
+      <div class="more-info-div" style="display:none" dfs-information>
+        <h3>Deep-First Search (DFS)</h3>
+        <p>DFS is unweighted and <span class="orange">does not guarantee</span> the shortest path. It is really
+          <span class="bold">unefficient</span> for path
+          finding. Basic
+          logic is, DFS will move to whichever closest node discovered, regardless of if that node and the following
+          nodes will lead to a <span class="bold">dead end.</span>So we can say it is a <span
+            class="blue">LIFO</span>(last in first out) logic.
+          Only when it is blindly obvious a dead end is
+          achieved, it will turn it's way
+          to the point where it
+          can discover the rest of the grid.
+        </p>
+        <p>Even when the end node is achieved, DFS will <span class="bold">still</span> visit all the nodes until that
+          node again, even if
+          they literally make the path longer. Only leading-to-dead-end nodes will be deducted.</p>
+
+        <br>
+        <p>Real life example could be as follows;</p>
+        <p>You want to watch the new season of your favorite show, you really wonder how the season finale will play
+          out. But to be able to understand the storyline, you have to watch each episode starting from the first to the
+          season finale so you do it. Each episode, every minute of those episodes. In the season finale you realize
+          some episodes were really <span class="bold">not
+            important</span> for the plot but
+          you have seen them anyways already.</p>
+        <img class="rectangle" src="Images/dfs.png" alt="">
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
